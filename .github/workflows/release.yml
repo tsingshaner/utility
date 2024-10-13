@@ -1,0 +1,54 @@
+name: release
+
+on:
+  push:
+    branches: ['main']
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm i
+      - name: Unit Test
+        run: pnpm test
+
+      - name: Create Release Pull Request
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: 'chore(release): update release & CHANGELOG.md'
+          title: '📦 Update Packages Version'
+          publish: pnpm changeset-publish
+          version: pnpm changeset-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: CNPM sync the latest published package
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          NPM_PACKAGE_NAME=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[0].name')
+          echo "Syncing CNPM $NPM_PACKAGE_NAME"
+          curl -X PUT "https://registry.npmmirror.com/${NPM_PACKAGE_NAME}/sync?publish=true&nodeps=false"
