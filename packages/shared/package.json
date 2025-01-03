@@ -1,0 +1,24 @@
+{
+  "name": "@qingshaner/utility-shared",
+  "type": "module",
+  "description": "Utilities from JavaScript & TypeScript.",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.ts",
+      "default": "./dits/index.js"
+    }
+  },
+  "peerDependencies": {
+    "typescript": "~5.5.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "type-fest": "^4.31.0"
+  }
+}
