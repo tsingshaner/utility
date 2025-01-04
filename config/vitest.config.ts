@@ -1,18 +1,30 @@
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineProject } from 'vitest/config'
 
-export default defineConfig({
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('../src/', import.meta.url))
-    }
-  },
+export default defineProject({
   test: {
-    coverage: {
-      all: true,
-      include: ['src/']
-    },
-    root: fileURLToPath(new URL('../', import.meta.url))
+    ...configDefaults,
+    alias: [
+      // {
+      //   find: /@qingshaner\/utility\-([\w-]+)\//,
+      //   replacement: fileURLToPath(new URL('../packages/$1/src/', import.meta.url))
+      // },
+      {
+        find: /@qingshaner\/utility\-([\w-]+)$/,
+        replacement: fileURLToPath(new URL('../packages/$1/src', import.meta.url))
+      },
+      // {
+      //   find: '@qingshaner/utility/',
+      //   replacement: fileURLToPath(new URL('../packages/utility/src/', import.meta.url))
+      // },
+      {
+        find: '@qingshaner/utility',
+        replacement: fileURLToPath(new URL('../packages/utility/src', import.meta.url))
+      }
+    ],
+    include: ['packages/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+    root: resolve(import.meta.dirname, '..')
   }
 })

@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "target": "ESNext",
+
+    "lib": ["ESNext"],
+    "types": ["node"],
+
+    "baseUrl": "..",
+    "rootDir": "..",
+    "paths": {
+      "@qingshaner/utility": ["src"],
+      "@qingshaner/utility-client": ["packages/client/src"],
+      "@qingshaner/utility-node": ["packages/node/src"],
+      "@qingshaner/utility-shared": ["packages/shared/src"]
+    }
+  },
+  "include": [
+    "../packages/server/src",
+    "../packages/shared/src",
+    "../packages/utility/src/server.ts",
+    "../packages/utility/src/index.ts",
+    "../**/*/*.config.ts",
+    "../vitest.workspace.ts"
+  ]
+}
