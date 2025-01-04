@@ -1,0 +1,14 @@
+{
+  "$schema": "https://jsr.io/schema/config-file.v1.json",
+  "name": "@qingshaner/utility",
+  "version": "0.0.0",
+  "exports": {
+    "client": "./src/client.ts",
+    ".": "./src/index.ts",
+    "server": "./src/server.ts"
+  },
+  "publish": {
+    "include": ["LICENSE", "README.md", "src/**/*.ts"]
+  },
+  "exclude": ["test"]
+}
