@@ -2,13 +2,33 @@
   "name": "@qingshaner/utility-shared",
   "type": "module",
   "description": "Utilities from JavaScript & TypeScript.",
+  "author": {
+    "name": "qingshaner",
+    "url": "https://github.com/Jon-a-than"
+  },
+  "license": "ISC",
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dits/index.js"
     }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "vite build"
   },
   "peerDependencies": {
     "typescript": "~5.5.0"
@@ -19,6 +39,7 @@
     }
   },
   "dependencies": {
+    "klona": "^2.0.6",
     "type-fest": "^4.31.0"
   }
 }

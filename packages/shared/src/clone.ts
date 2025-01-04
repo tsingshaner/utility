@@ -1,0 +1,31 @@
+export {
+  /**
+   * Like `deepCloneLite`, but adds object with RegExp, Date, Array, Map, Set, custom class, Int8Array, DataView, Buffer values
+   * @see {@link https://www.npmjs.com/package/klona?activeTab=readme#klona}
+   */
+  klona as deepClone
+} from 'klona'
+
+export {
+  /**
+   * Like `deepClone`, but adds Symbol and non-enumerable properties
+   * @see {@link https://www.npmjs.com/package/klona?activeTab=readme#klonafull}
+   */
+  klona as deepCloneFull
+} from 'klona/full'
+
+export {
+  /**
+   * Compares an array of objects comprised of JSON data types (String, Number, null, Array, Object)
+   * @see {@link https://www.npmjs.com/package/klona?activeTab=readme#klonajson}
+   */
+  klona as deepCloneJSON
+} from 'klona/json'
+
+export {
+  /**
+   * Like `deepCloneJSON`, but adds RegExp, Date and undefined values
+   * @see {@link https://www.npmjs.com/package/klona?activeTab=readme#klonalite}
+   */
+  klona as deepCloneLite
+} from 'klona/lite'
