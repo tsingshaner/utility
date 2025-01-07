@@ -66,6 +66,9 @@ export const cleanDir = async (path: PathLike): Promise<Result<unknown, NodeJSEr
   return safeMkdir(path, { recursive: true })
 }
 
+/** Handle the error of the `fs.stat` function. */
 export const safeStat = asyncSafety<typeof stat, NodeJSErrnoException>(stat)
+/** Handle the error of the `fs.statSync`. */
 export const safeSyncStat = syncSafety<typeof statSync, NodeJSErrnoException>(statSync)
+/** Handle the error of the `fs.mkdir`. */
 export const safeMkdir = asyncSafety<typeof mkdir, NodeJSErrnoException>(mkdir)
