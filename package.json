@@ -1,7 +1,6 @@
 {
-  "name": "qingshaner",
+  "name": "utility",
   "type": "module",
-  "version": "0.0.0",
   "private": true,
   "description": "Some utilities for JavaScript & TypeScript projects",
   "author": {
