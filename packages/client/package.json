@@ -1,7 +1,7 @@
 {
   "name": "@qingshaner/utility-client",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "qingshaner",
     "url": "https://github.com/Jon-a-than"
@@ -17,7 +17,9 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
