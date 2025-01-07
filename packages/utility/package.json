@@ -1,7 +1,7 @@
 {
   "name": "@qingshaner/utility",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Some utilities for JavaScript & TypeScript projects",
   "author": {
     "name": "qingshaner",
@@ -28,7 +28,9 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
