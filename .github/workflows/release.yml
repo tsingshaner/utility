@@ -34,6 +34,9 @@ jobs:
       - name: Unit Test
         run: pnpm test
 
+      - name: Build packages
+        run: pnpm -r build
+
       - name: Create Release Pull Request
         id: changesets
         uses: changesets/action@v1

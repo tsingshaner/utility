@@ -24,7 +24,7 @@ export default defineProject({
         replacement: fileURLToPath(new URL('../packages/utility/src', import.meta.url))
       }
     ],
-    include: ['packages/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+    include: ['packages/*/src/**/*.{test,spec}.?(c|m)ts?(x)'],
     root: resolve(import.meta.dirname, '..')
   }
 })
