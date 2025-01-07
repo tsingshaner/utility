@@ -41,7 +41,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          commit: 'chore(release): update release & CHANGELOG.md'
+          commit: 'release: release packages & update CHANGELOG.md'
           title: '📦 Update Packages Version'
           publish: pnpm changeset-publish
           version: pnpm changeset-version
