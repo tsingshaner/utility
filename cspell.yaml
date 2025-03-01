@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+import: '@qingshaner/eslint-config/cspell'
+
+words:
+  - klona

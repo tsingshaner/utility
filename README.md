@@ -1,4 +1,4 @@
-# TypeScript 库开发模板
+# 🛠️ Utility
 
 <p align="center">
 <a href="https://jsr.io/@qingshaner/utility"><img src="https://jsr.io/badges/@qingshaner/utility" alt="JSR package" /></a>
@@ -9,12 +9,9 @@
 <a href="https://biomejs.dev" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome"></a>
 </p>
 
-## 初始化 changesets
+This is a utility package for JavaScript, including client, server, and shared code.
 
-```bash
-pnpm changeset init
-```
-
-## CodeCov 配置
-
-添加 `CODECOV_TOKEN` 环境变量，值为 CodeCov 项目的 token。
+- `@qingshaner/utility-client`: Utility functions that depend on the server-side.
+- `@qingshaner/utility-server`: Utility functions that depend on the browser client.
+- `@qingshaner/utility-shared`: Utility functions shared between the browser and the server.
+- `@qingshaner/utility`: Utility that combines the above three packages.

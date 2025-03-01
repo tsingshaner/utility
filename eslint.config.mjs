@@ -6,6 +6,7 @@ const ROOT = import.meta.dirname
 
 export default presetESLintConfig({
   biome: true,
+  cspell: { configFile: resolve(ROOT, 'cspell.yaml') },
   ignores: [resolve(ROOT, '.gitignore'), ['pnpm-lock.yaml']],
   jsonc: true,
   perfectionist: true,

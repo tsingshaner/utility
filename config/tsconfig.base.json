@@ -11,6 +11,7 @@
     "verbatimModuleSyntax": true,
 
     "strict": true,
+    "strictFunctionTypes": true,
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
