@@ -3,3 +3,4 @@ import: '@qingshaner/eslint-config/cspell'
 
 words:
   - klona
+  - scule

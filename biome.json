@@ -1,6 +1,18 @@
 {
   "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["@qingshaner/eslint-config/biome"],
+  "overrides": [
+    {
+      "include": ["*.test.ts", "*.bench.ts"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useExplicitType": "off"
+          }
+        }
+      }
+    }
+  ],
   "linter": {
     "rules": {
       "correctness": {

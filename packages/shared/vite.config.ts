@@ -40,7 +40,7 @@ export default defineConfig({
         typescriptCompilerFolder: resolve(root, '../../node_modules/typescript')
       },
       rollupTypes: true,
-      tsconfigPath: resolve(root, '../../config/tsconfig.build.json')
+      tsconfigPath: resolve(root, '../../.config/tsconfig.build.json')
     })
   ],
   resolve: {

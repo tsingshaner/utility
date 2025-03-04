@@ -22,6 +22,7 @@
     "../packages/utility/src/server.ts",
     "../packages/utility/src/index.ts",
     "../**/*/*.config.ts",
+    "./*.ts",
     "../vitest.workspace.ts"
   ]
 }
