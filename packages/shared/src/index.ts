@@ -1,4 +1,5 @@
-export * from './clone'
 export * from './func'
+export * from './object'
 export * from './string'
+export type * from './types'
 export type * from 'type-fest'
