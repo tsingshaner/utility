@@ -49,7 +49,4 @@ jobs:
 
       - name: CNPM sync the latest published package
         if: steps.changesets.outputs.published == 'true'
-        run: |
-          NPM_PACKAGE_NAME=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[0].name')
-          echo "Syncing CNPM $NPM_PACKAGE_NAME"
-          curl -X PUT "https://registry.npmmirror.com/${NPM_PACKAGE_NAME}/sync?publish=true&nodeps=false"
+        run: ./scripts/sync-cnpm.bash '${{ steps.changesets.outputs.publishedPackages }}'

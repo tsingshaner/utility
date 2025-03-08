@@ -23,6 +23,7 @@
     "../packages/utility/src/index.ts",
     "../**/*/*.config.ts",
     "./*.ts",
+    "../scripts",
     "../vitest.workspace.ts"
   ]
 }
