@@ -1,6 +1,11 @@
 const htmlEscapeRE = /[<>&"']/g
 
-export const escapeHTML = (text: string) =>
+/**
+ * @param text - The content to process.
+ *
+ * @beta
+ */
+export const escapeHTML = (text: string): string =>
   text.replace(htmlEscapeRE, (c) => {
     switch (c) {
       case "'":
@@ -18,7 +23,12 @@ export const escapeHTML = (text: string) =>
     }
   })
 
-export const unescapeHTML = (text: string) => {
+/**
+ * @param text - The content to process.
+ *
+ * @beta
+ */
+export const unescapeHTML = (text: string): string => {
   return text
     .replace(/&quot;/g, '"')
     .replace(/&lt;/g, '<')
@@ -29,5 +39,16 @@ export const unescapeHTML = (text: string) => {
 
 const mdEscapeRE = /([|*_~`])/g
 
-export const escapeMD = (text: string) => text.replace(mdEscapeRE, '\\$1')
-export const unescapeMD = (text: string) => text.replace(/\\([|*_~`])/g, '$1')
+/**
+ * @param text - The content to process.
+ *
+ * @beta
+ */
+export const escapeMD = (text: string): string => text.replace(mdEscapeRE, '\\$1')
+
+/**
+ * @param text - The content to process.
+ *
+ * @beta
+ */
+export const unescapeMD = (text: string): string => text.replace(/\\([|*_~`])/g, '$1')
