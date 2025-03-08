@@ -18,7 +18,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "changeset-version": "changeset version && node --experimental-strip-types ./scripts/jsr-version.ts",
+    "changeset-version": "changeset version && node --experimental-strip-types ./scripts/jsr-version.ts --run",
     "changeset-publish": "changeset publish",
     "format": "biome format . --write",
     "lint": "biome lint . --write && eslint . --fix",

@@ -9,7 +9,7 @@ interface Package {
   version: string
 }
 
-const getPackage = async (path: PathLike): Promise<Package> =>
+export const getPackage = async (path: PathLike): Promise<Package> =>
   JSON.parse(await readFile(path, { encoding: 'utf-8' })) as Promise<Package>
 const updateVersion = async (path: PathLike, version: string): Promise<void> => {
   const jsrContent = (await readFile(path, { encoding: 'utf-8' })).replace(/"version": ".*"/, `"version": "${version}"`)
@@ -27,4 +27,6 @@ const updateJSRPackages = async (pkgDirIterator: NodeJS.AsyncIterator<string>): 
   }
 }
 
-void updateJSRPackages(glob('packages/*'))
+if (process.argv[2] === '--run') {
+  void updateJSRPackages(glob('packages/*'))
+}

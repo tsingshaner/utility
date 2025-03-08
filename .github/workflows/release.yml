@@ -47,6 +47,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Publish to JSR
+        if: steps.changesets.outputs.published == 'true'
+        run: node --experimental-strip-types .\scripts\jsr-publish.ts '${{ steps.changesets.outputs.publishedPackages }}'
+
       - name: CNPM sync the latest published package
         if: steps.changesets.outputs.published == 'true'
-        run: ./scripts/sync-cnpm.bash '${{ steps.changesets.outputs.publishedPackages }}'
+        run: |
+          echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -c '.[]' | while read package; do
+            NPM_PACKAGE_NAME=$(echo $package | jq -r '.name')
+            echo "Syncing CNPM $NPM_PACKAGE_NAME"
+            LOG_ID=$(curl -X PUT "https://registry.npmmirror.com/${NPM_PACKAGE_NAME}/sync?publish=true&nodeps=false" | jq -r '.logId')
+            echo "Log URL: https://registry.npmmirror.com/-/package/${NPM_PACKAGE_NAME}/syncs/${LOG_ID}/log"
+          done
