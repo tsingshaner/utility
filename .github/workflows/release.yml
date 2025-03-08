@@ -12,6 +12,8 @@ permissions:
   packages: write
 
 jobs:
+  permissions:
+    id-token: write
   release:
     runs-on: ubuntu-latest
 
