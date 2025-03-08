@@ -1,5 +1,11 @@
 # @qingshaner/utility-shared
 
+## 0.0.4
+
+### Patch Changes
+
+- 6a19292: fix ci path error
+
 ## 0.0.3
 
 ### Patch Changes
