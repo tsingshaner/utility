@@ -1,5 +1,13 @@
 # @qingshaner/utility-client
 
+## 0.0.3
+
+### Patch Changes
+
+- f8590f2: fix ci error
+- Updated dependencies [f8590f2]
+  - @qingshaner/utility-shared@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes
