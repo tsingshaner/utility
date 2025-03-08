@@ -1,7 +1,7 @@
 {
   "name": "@qingshaner/utility-shared",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utilities from JavaScript & TypeScript.",
   "author": {
     "name": "qingshaner",

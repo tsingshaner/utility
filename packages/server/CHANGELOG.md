@@ -1,5 +1,14 @@
 # @qingshaner/utility-server
 
+## 0.0.2
+
+### Patch Changes
+
+- 650dba0: Add return type
+- 8606a65: Add ensureDir func
+- Updated dependencies [650dba0]
+  - @qingshaner/utility-shared@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes
