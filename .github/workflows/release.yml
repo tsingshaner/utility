@@ -49,7 +49,7 @@ jobs:
 
       - name: Publish to JSR
         if: steps.changesets.outputs.published == 'true'
-        run: node --experimental-strip-types .\scripts\jsr-publish.ts '${{ steps.changesets.outputs.publishedPackages }}'
+        run: node --experimental-strip-types ./scripts/jsr-publish.ts '${{ steps.changesets.outputs.publishedPackages }}'
 
       - name: CNPM sync the latest published package
         if: steps.changesets.outputs.published == 'true'
