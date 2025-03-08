@@ -19,10 +19,11 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
+    "node": ">=20.0.0"
   },
   "publishConfig": {
     "access": "public",
@@ -41,6 +42,6 @@
   },
   "dependencies": {
     "klona": "^2.0.6",
-    "type-fest": "^4.31.0"
+    "type-fest": "^4.36.0"
   }
 }
