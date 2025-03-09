@@ -6,6 +6,12 @@
 // biome-ignore lint/suspicious/noExplicitAny: use any for generic types
 export type AnyAsyncFunc = (...args: any[]) => PromiseLike<any>
 /**
+ * Get return type of async func.
+ *
+ * @public
+ */
+export type AsyncReturnType<T extends AnyAsyncFunc> = Awaited<ReturnType<T>>
+/**
  * A function that can take any arguments and return any value.
  *
  * @public
@@ -18,3 +24,14 @@ export type AnyFunc = (...args: any[]) => any
  * @public
  */
 export type MaybePromise<T> = PromiseLike<T> | T
+/**
+ * Generic an array type which behaves like a set.
+ *
+ * @public
+ */
+// biome-ignore lint/suspicious/noExplicitAny: use any for generic types
+export type ArraySet<T extends any[]> = T extends [infer F, ...infer R]
+  ? F extends R[number]
+    ? never
+    : [F, ...ArraySet<R>]
+  : T

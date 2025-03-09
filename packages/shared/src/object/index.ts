@@ -1,4 +1,5 @@
 export { mergeObject, type MergeObjectOptions } from './merge'
+export { omit, toOmitted } from './omit'
 
 export {
   /**

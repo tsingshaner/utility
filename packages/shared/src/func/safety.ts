@@ -1,19 +1,27 @@
-import type { AnyAsyncFunc, AnyFunc } from '../types'
+import type { SetReturnType } from 'type-fest'
 
+import type { AnyAsyncFunc, AnyFunc, AsyncReturnType } from '../types'
+
+/**
+ * Generic result type from a func.
+ *
+ * @public
+ */
+export type ResultFromFunc<T extends AnyFunc, E> = Result<AsyncReturnType<T>, E>
 /**
  * Wrap async function with error handling.
  *
  * @public
  * @template T - The typeof provide fn.
  */
-export type AsyncSafetyFn<T extends AnyFunc, E> = (...args: Parameters<T>) => Promise<Result<Awaited<ReturnType<T>>, E>>
+export type AsyncSafetyFn<T extends AnyAsyncFunc, E> = SetReturnType<T, Promise<ResultFromFunc<T, E>>>
 /**
  * Wrap sync function with error handling.
  *
  * @public
  * @template T - The typeof provide fn.
  */
-export type SyncSafetyFn<T extends AnyFunc, E> = (...args: Parameters<T>) => Result<ReturnType<T>, E>
+export type SyncSafetyFn<T extends AnyFunc, E> = SetReturnType<T, ResultFromFunc<T, E>>
 /**
  * The result of a function that may throw an error.
  * @remarks
@@ -43,15 +51,14 @@ export type Result<T, E = Error> = [cause: E, success: false] | [data: T, succes
  *
  * @public
  */
-export const asyncSafety =
-  <T extends AnyAsyncFunc, E = unknown>(fn: T): AsyncSafetyFn<T, E> =>
-  async (...args: Parameters<T>): Promise<Result<Awaited<ReturnType<T>>, E>> => {
+export const asyncSafety = <T extends AnyAsyncFunc, E = unknown>(fn: T): AsyncSafetyFn<T, E> =>
+  (async (...args: Parameters<T>) => {
     try {
       return [await fn(...args), true]
     } catch (error) {
       return [error as E, false]
     }
-  }
+  }) as AsyncSafetyFn<T, E>
 
 /**
  * Wrap a sync function to catch the error.
@@ -61,12 +68,11 @@ export const asyncSafety =
  *
  * @public
  */
-export const syncSafety =
-  <T extends AnyFunc, E = unknown>(fn: T): SyncSafetyFn<T, E> =>
-  (...args: Parameters<T>): Result<ReturnType<T>, E> => {
+export const syncSafety = <T extends AnyFunc, E = unknown>(fn: T): SyncSafetyFn<T, E> =>
+  ((...args: Parameters<T>) => {
     try {
       return [fn(...args), true]
     } catch (error) {
-      return [error as E, false]
+      return [error, false]
     }
-  }
+  }) as SyncSafetyFn<T, E>
