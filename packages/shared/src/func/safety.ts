@@ -1,13 +1,13 @@
 import type { SetReturnType } from 'type-fest'
 
-import type { AnyAsyncFunc, AnyFunc, AsyncReturnType } from '../types'
+import type { AnyAsyncFunc, AnyFunc, AwaitedReturnType } from '../types'
 
 /**
  * Generic result type from a func.
  *
  * @public
  */
-export type ResultFromFunc<T extends AnyFunc, E> = Result<AsyncReturnType<T>, E>
+export type ResultFromFunc<T extends AnyFunc, E> = Result<AwaitedReturnType<T>, E>
 /**
  * Wrap async function with error handling.
  *

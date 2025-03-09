@@ -10,7 +10,7 @@ export type AnyAsyncFunc = (...args: any[]) => PromiseLike<any>
  *
  * @public
  */
-export type AsyncReturnType<T extends AnyAsyncFunc> = Awaited<ReturnType<T>>
+export type AwaitedReturnType<T extends AnyAsyncFunc> = Awaited<ReturnType<T>>
 /**
  * A function that can take any arguments and return any value.
  *
