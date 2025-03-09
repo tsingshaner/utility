@@ -1,31 +1,40 @@
 import { type PathLike, type StatOptions, statSync } from 'node:fs'
 import { mkdir, rm, stat } from 'node:fs/promises'
 
-import { asyncSafety, type Result, syncSafety } from '@qingshaner/utility-shared'
+import { asyncSafety, syncSafety } from '@qingshaner/utility-shared'
 
+import type { AnyAsyncFunc, AnyFunc, AsyncSafetyFn, Result, SyncSafetyFn } from '@qingshaner/utility-shared'
+
+/**
+ * Warp nodejs fs module that maybe catch NodeJSErrnoException.
+ *
+ * @public
+ */
+export type SafetyNodeFSFn<T extends AnyFunc> = T extends AnyAsyncFunc
+  ? AsyncSafetyFn<T, NodeJSErrnoException>
+  : SyncSafetyFn<T, NodeJSErrnoException>
 /**
  * Handle the error of the `fs.rm` function.
  *
  * @public
  */
-export const safeRm = asyncSafety<typeof rm, NodeJSErrnoException>(rm)
+export const safeRm: SafetyNodeFSFn<typeof rm> = asyncSafety(rm)
 /**
  * Handle the error of the `fs.stat` function.
  *
  * @public
  */
-export const safeStat = asyncSafety<typeof stat, NodeJSErrnoException>(stat)
+export const safeStat: SafetyNodeFSFn<typeof stat> = asyncSafety(stat)
 /** Handle the error of the `fs.statSync`.
  *
  * @public
  */
-export const safeSyncStat = syncSafety<typeof statSync, NodeJSErrnoException>(statSync)
+export const safeSyncStat: SafetyNodeFSFn<typeof statSync> = syncSafety(statSync)
 /** Handle the error of the `fs.mkdir`.
  *
  * @public
  */
-export const safeMkdir = asyncSafety<typeof mkdir, NodeJSErrnoException>(mkdir)
-
+export const safeMkdir: SafetyNodeFSFn<typeof mkdir> = asyncSafety(mkdir)
 /**
  * The error code of the `NodeJS.ErrnoException`.
  * @see {@link https://nodejs.org/docs/latest/api/errors.html#common-system-errors | NodeJS.ErrnoException}
@@ -62,7 +71,6 @@ export const ErrnoExceptionCode = {
   /** (Operation timed out): A connect or send request failed because the connected party did not properly respond after a period of time. Usually encountered by http or net. Often a sign that a socket.end() was not properly called. */
   eTimedout: 'ETIMEDOUT'
 }
-
 /**
  * The `NodeJS.ErrnoException` type with type infer for code.
  *
