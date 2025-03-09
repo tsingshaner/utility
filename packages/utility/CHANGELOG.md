@@ -1,5 +1,22 @@
 # @qingshaner/utility
 
+## 0.1.0
+
+### Minor Changes
+
+- bc4332e: Bump type-fest to `4.37.0`
+- 9779e75: Add omit & toOmitted func
+
+### Patch Changes
+
+- bc29f42: Add escape HTML & Markdown func
+- Updated dependencies [bc4332e]
+- Updated dependencies [bc29f42]
+- Updated dependencies [9779e75]
+  - @qingshaner/utility-shared@0.1.0
+  - @qingshaner/utility-client@0.1.0
+  - @qingshaner/utility-server@0.1.0
+
 ## 0.0.4
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @qingshaner/utility-shared
 
+## 0.1.0
+
+### Minor Changes
+
+- bc4332e: Bump type-fest to `4.37.0`
+- bc29f42: Add escape HTML & Markdown func
+- 9779e75: Add omit & toOmitted func
+
 ## 0.0.4
 
 ### Patch Changes
