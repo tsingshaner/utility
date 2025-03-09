@@ -10,10 +10,9 @@ permissions:
   contents: write
   pull-requests: write
   packages: write
+  id-token: write
 
 jobs:
-  permissions:
-    id-token: write
   release:
     runs-on: ubuntu-latest
 
