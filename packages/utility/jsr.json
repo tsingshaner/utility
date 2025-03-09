@@ -3,9 +3,9 @@
   "name": "@qingshaner/utility",
   "version": "0.1.0",
   "exports": {
-    "client": "./src/client.ts",
+    "./client": "./src/client.ts",
     ".": "./src/index.ts",
-    "server": "./src/server.ts"
+    "./server": "./src/server.ts"
   },
   "publish": {
     "include": ["LICENSE", "README.md", "src/**/*.ts"]
