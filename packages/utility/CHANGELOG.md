@@ -1,5 +1,18 @@
 # @qingshaner/utility
 
+## 0.2.0
+
+### Minor Changes
+
+- d246dd8: Add exec promisify func
+
+### Patch Changes
+
+- Updated dependencies [d246dd8]
+  - @qingshaner/utility-server@0.2.0
+  - @qingshaner/utility-shared@0.2.0
+  - @qingshaner/utility-client@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes

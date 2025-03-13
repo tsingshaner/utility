@@ -1,5 +1,11 @@
 # @qingshaner/utility-client
 
+## 0.2.0
+
+### Patch Changes
+
+- @qingshaner/utility-shared@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
