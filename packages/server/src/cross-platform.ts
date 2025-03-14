@@ -1,11 +1,29 @@
+import process from 'node:process'
+
 interface IGetEnvPathKey {
   (): string
   /** @internal */
   pathKey?: string
 }
 
+const parsePathKey = (opts: Pick<NodeJS.Process, 'env' | 'platform'>): string => {
+  if (opts.platform !== 'win32') {
+    return 'PATH'
+  }
+
+  let pathKey = 'Path'
+  for (const key in opts.env) {
+    if (key.toLowerCase() === 'path') {
+      pathKey = key
+    }
+  }
+
+  return pathKey
+}
+
 /**
  * Returns the key for the PATH environment variable.
+ * @param opts - The options to use.
  *
  * @remarks
  * On Windows, this is usually 'Path', but it is not guaranteed.
@@ -15,22 +33,18 @@ interface IGetEnvPathKey {
  *
  * @public
  */
-export const getEnvPathKey = (() => {
+export const getEnvPathKey = ((opts?: Partial<Pick<NodeJS.Process, 'env' | 'platform'>>) => {
+  if (opts !== undefined) {
+    return parsePathKey({
+      env: opts.env ?? process.env,
+      platform: opts.platform ?? process.platform
+    })
+  }
+
   if (getEnvPathKey.pathKey !== undefined) {
     return getEnvPathKey.pathKey
   }
 
-  if (process.platform === 'win32') {
-    getEnvPathKey.pathKey = 'Path'
-    for (const key in process.env) {
-      if (key.toLowerCase() === 'path') {
-        getEnvPathKey.pathKey = key
-        break
-      }
-    }
-  } else {
-    getEnvPathKey.pathKey = 'PATH'
-  }
-
+  getEnvPathKey.pathKey = parsePathKey(process)
   return getEnvPathKey.pathKey
 }) as IGetEnvPathKey
