@@ -19,9 +19,7 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "engines": {
     "node": ">=20.0.0"
   },
@@ -33,12 +31,12 @@
     "build": "vite build"
   },
   "peerDependencies": {
+    "@types/node": "^22.13.10",
     "typescript": ">=5.5.0"
   },
   "peerDependenciesMeta": {
-    "typescript": {
-      "optional": true
-    }
+    "@types/node": { "optional": true },
+    "typescript": { "optional": true }
   },
   "dependencies": {
     "klona": "^2.0.6",

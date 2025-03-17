@@ -1,13 +1,14 @@
 import process from 'node:process'
 
-interface IGetEnvPathKey {
-  (): string
-  /** @internal */
-  pathKey?: string
-}
+/**
+ * Whether the current platform is Windows.
+ *
+ * @public
+ */
+export const IS_WIN = process.platform === 'win32'
 
 const parsePathKey = (opts: Pick<NodeJS.Process, 'env' | 'platform'>): string => {
-  if (opts.platform !== 'win32') {
+  if (!IS_WIN) {
     return 'PATH'
   }
 
@@ -19,6 +20,16 @@ const parsePathKey = (opts: Pick<NodeJS.Process, 'env' | 'platform'>): string =>
   }
 
   return pathKey
+}
+
+interface IGetEnvPathKey {
+  (): string
+  /**
+   * A cache key to avoid re-parsing the path key
+   *
+   * @internal
+   * */
+  pathKey?: string
 }
 
 /**
