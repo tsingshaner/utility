@@ -5,4 +5,4 @@
 "@qingshaner/utility": patch
 ---
 
-Add toAttay func
+Add toArray func

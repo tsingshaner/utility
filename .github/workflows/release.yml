@@ -48,9 +48,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish to JSR
+      - name: Publish to jsr.io
         if: steps.changesets.outputs.published == 'true'
-        run: node --experimental-strip-types ./scripts/jsr-publish.ts '${{ steps.changesets.outputs.publishedPackages }}'
+        run: pnpm dlx @qingshaner/jsr-release publish --changesetReleases='${{ steps.changesets.outputs.publishedPackages }}'
 
       - name: CNPM sync the latest published package
         if: steps.changesets.outputs.published == 'true'
