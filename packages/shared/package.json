@@ -1,7 +1,7 @@
 {
   "name": "@qingshaner/utility-shared",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Utilities from JavaScript & TypeScript.",
   "author": {
     "name": "qingshaner",
@@ -19,7 +19,9 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },
@@ -35,8 +37,12 @@
     "typescript": ">=5.5.0"
   },
   "peerDependenciesMeta": {
-    "@types/node": { "optional": true },
-    "typescript": { "optional": true }
+    "@types/node": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
   },
   "dependencies": {
     "klona": "^2.0.6",

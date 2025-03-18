@@ -1,5 +1,11 @@
 # @qingshaner/utility-shared
 
+## 0.2.1
+
+### Patch Changes
+
+- ac9c641: Add toArray func
+
 ## 0.2.0
 
 ## 0.1.0
