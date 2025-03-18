@@ -1,5 +1,15 @@
 # @qingshaner/utility
 
+## 0.2.1
+
+### Patch Changes
+
+- ac9c641: Add toArray func
+- Updated dependencies [ac9c641]
+  - @qingshaner/utility-server@0.2.1
+  - @qingshaner/utility-shared@0.2.1
+  - @qingshaner/utility-client@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
