@@ -1,5 +1,18 @@
 # @qingshaner/utility
 
+## 0.3.0
+
+### Minor Changes
+
+- d512fd4: Add debounce & throttle func
+
+### Patch Changes
+
+- Updated dependencies [d512fd4]
+  - @qingshaner/utility-server@0.3.0
+  - @qingshaner/utility-shared@0.3.0
+  - @qingshaner/utility-client@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes
