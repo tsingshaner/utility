@@ -6,4 +6,4 @@ import { promisify } from 'node:util'
  *
  * @public
  */
-export const promisifyExec = promisify(exec)
+export const promisifyExec: typeof exec.__promisify__ = promisify(exec)
