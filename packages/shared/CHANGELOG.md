@@ -1,5 +1,11 @@
 # @qingshaner/utility-shared
 
+## 0.3.0
+
+### Minor Changes
+
+- d512fd4: Add debounce & throttle func
+
 ## 0.2.1
 
 ### Patch Changes
