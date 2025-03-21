@@ -15,6 +15,8 @@ Utility functions that depend on the browser client.
 
 The following links may be useful, but not included in the package.
 
-|            External packages            | Description                 |
-| :-------------------------------------: | :-------------------------- |
-| [scule](https://unjs.io/packages/scule) | For string case conversion. |
+|                External packages                | Description                 |
+| :---------------------------------------------: | :-------------------------- |
+| [klona](https://github.com/lukeed/klona#readme) | A deep clone utility.       |
+|     [scule](https://unjs.io/packages/scule)     | For string case conversion. |
+
