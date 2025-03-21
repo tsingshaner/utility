@@ -1,7 +1,7 @@
 {
   "name": "@qingshaner/utility",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Some utilities for JavaScript & TypeScript projects",
   "author": {
     "name": "qingshaner",

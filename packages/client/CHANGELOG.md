@@ -1,5 +1,13 @@
 # @qingshaner/utility-client
 
+## 0.3.1
+
+### Patch Changes
+
+- 6325267: Fix slow type error
+- Updated dependencies [6325267]
+  - @qingshaner/utility-shared@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes
