@@ -56,7 +56,7 @@ export const mergeObject = <T extends object, U extends object>(
   for (const key of Reflect.ownKeys(overrides)) {
     const override = Reflect.get(overrides, key)
 
-    if (override === undefined || override === null) {
+    if (override == null) {
       if (opts?.acceptEmptyValues) {
         Reflect.set(source, key, override)
       }

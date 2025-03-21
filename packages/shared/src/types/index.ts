@@ -35,3 +35,30 @@ export type ArraySet<T extends any[]> = T extends [infer F, ...infer R]
     ? never
     : [F, ...ArraySet<R>]
   : T
+/**
+ * A type representing the return type of the setTimeout function.
+ *
+ * @public
+ */
+export type Timeout = ReturnType<typeof setTimeout>
+/**
+ * A type representing the return type of the setInterval function.
+ *
+ * @public
+ */
+export type FuncWithProps<T extends AnyFunc, P extends object> = P & T
+// 定义排除类型：将U从T中剔除, keyof 会取出T与U的所有键, 限定P的取值范围为T中的所有键, 并将其类型设为never
+// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
+// 定义互斥类型，T或U只有一个能出现（互相剔除时，被剔除方必须存在）
+export type Xor<T, U> = (T & Without<U, T>) | (U & Without<T, U>)
+
+// eslint-disable-next-line perfectionist/sort-modules, perfectionist/sort-intersection-types
+export type RequireAtLeastOneTrue<T, Keys extends keyof T> = Omit<T, Keys> & {
+  [K in Keys]: T[K] extends boolean ? true : T[K]
+  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+} & {
+  [K in Keys]?: false
+} extends infer O
+  ? { [P in keyof O]: O[P] }
+  : never

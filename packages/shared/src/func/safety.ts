@@ -10,16 +10,16 @@ import type { AnyAsyncFunc, AnyFunc, AwaitedReturnType } from '../types'
 export type ResultFromFunc<T extends AnyFunc, E> = Result<AwaitedReturnType<T>, E>
 /**
  * Wrap async function with error handling.
+ * @template T - The typeof provide fn.
  *
  * @public
- * @template T - The typeof provide fn.
  */
 export type AsyncSafetyFn<T extends AnyAsyncFunc, E> = SetReturnType<T, Promise<ResultFromFunc<T, E>>>
 /**
  * Wrap sync function with error handling.
+ * @template T - The typeof provide fn.
  *
  * @public
- * @template T - The typeof provide fn.
  */
 export type SyncSafetyFn<T extends AnyFunc, E> = SetReturnType<T, ResultFromFunc<T, E>>
 /**
