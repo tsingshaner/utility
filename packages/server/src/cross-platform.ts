@@ -28,7 +28,7 @@ interface IGetEnvPathKey {
    * A cache key to avoid re-parsing the path key
    *
    * @internal
-   * */
+   */
   pathKey?: string
 }
 

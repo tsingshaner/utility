@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": "..",
+    "rootDir": "..",
+
+    "paths": {
+      "@qingshaner/utility-client": ["packages/client/src"],
+      "@qingshaner/utility-shared": ["packages/shared/src"]
+    }
+  },
+  "include": ["../packages/*/src"]
+}

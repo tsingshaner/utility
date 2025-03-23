@@ -17,6 +17,13 @@ export default defineProject({
       }
     ],
     include: ['packages/*/src/**/*.{test,spec}.?(c|m)ts?(x)'],
-    root: resolve(import.meta.dirname, '..')
+    root: resolve(import.meta.dirname, '..'),
+    typecheck: {
+      checker: 'tsc',
+      enabled: true,
+      ignoreSourceErrors: false,
+      only: false,
+      tsconfig: fileURLToPath(new URL('tsconfig.vitest.json', import.meta.url))
+    }
   }
 })
