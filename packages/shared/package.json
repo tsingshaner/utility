@@ -46,6 +46,6 @@
   },
   "dependencies": {
     "klona": "^2.0.6",
-    "type-fest": "^4.37.0"
+    "type-fest": "^4.38.0"
   }
 }
