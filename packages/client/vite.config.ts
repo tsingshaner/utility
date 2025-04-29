@@ -13,7 +13,7 @@ export default defineConfig({
       entry: {
         index: resolve(root, 'src/index.ts')
       },
-      formats: ['es', 'cjs']
+      formats: ['es']
     },
     minify: false,
     rollupOptions: {

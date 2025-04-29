@@ -10,3 +10,11 @@
 </p>
 
 Utility functions that depend on the browser client.
+
+## 🧩 Useful Links
+
+The following links may be useful, but not included in this package.
+
+|                     External packages                     | Description                                    |
+| :-------------------------------------------------------: | :--------------------------------------------- |
+| [idb-keyval](https://github.com/jakearchibald/idb-keyval) | A localStorage like indexDB operation utility. |
