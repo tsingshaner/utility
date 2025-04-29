@@ -1,5 +1,16 @@
 # @qingshaner/utility-server
 
+## 0.4.0
+
+### Minor Changes
+
+- ea43b8f: Add clamp, isDefined, compact feature.
+
+### Patch Changes
+
+- Updated dependencies [ea43b8f]
+  - @qingshaner/utility-shared@0.4.0
+
 ## 0.3.1
 
 ### Patch Changes

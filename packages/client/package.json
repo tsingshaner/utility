@@ -1,13 +1,17 @@
 {
   "name": "@qingshaner/utility-client",
   "type": "module",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": {
     "name": "qingshaner",
     "url": "https://github.com/Jon-a-than"
   },
   "license": "ISC",
-  "keywords": ["utility", "browser", "typescript"],
+  "keywords": [
+    "utility",
+    "browser",
+    "typescript"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -18,7 +22,9 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },

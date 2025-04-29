@@ -1,5 +1,11 @@
 # @qingshaner/utility-shared
 
+## 0.4.0
+
+### Minor Changes
+
+- ea43b8f: Add clamp, isDefined, compact feature.
+
 ## 0.3.1
 
 ### Patch Changes
