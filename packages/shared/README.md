@@ -11,12 +11,20 @@
 
 Utility functions that depend on the browser client.
 
-## Useful Links
+## 🧩 Useful Links
 
-The following links may be useful, but not included in the package.
+The following links may be useful, but not included in this package.
 
 |                External packages                | Description                 |
 | :---------------------------------------------: | :-------------------------- |
 | [klona](https://github.com/lukeed/klona#readme) | A deep clone utility.       |
 |     [scule](https://unjs.io/packages/scule)     | For string case conversion. |
 
+## 📄 License
+
+### Third-Party Code
+
+This project includes code inspired by the following library:
+
+1. [`klona`](https://www.npmjs.com/package/klona) by Luke Edwards
+   Licensed under the MIT License.
