@@ -1,5 +1,17 @@
 # @qingshaner/utility-client
 
+## 0.4.0
+
+### Minor Changes
+
+- ea43b8f: Add clamp, isDefined, compact feature.
+- 4354be0: Add media match helper
+
+### Patch Changes
+
+- Updated dependencies [ea43b8f]
+  - @qingshaner/utility-shared@0.4.0
+
 ## 0.3.1
 
 ### Patch Changes
