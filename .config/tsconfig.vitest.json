@@ -6,6 +6,7 @@
 
     "paths": {
       "@qingshaner/utility-client": ["packages/client/src"],
+      "@qingshaner/utility-server": ["packages/server/src"],
       "@qingshaner/utility-shared": ["packages/shared/src"]
     }
   },
