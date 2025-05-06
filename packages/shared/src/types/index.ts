@@ -57,7 +57,7 @@ export type FuncWithProps<T extends AnyFunc, P extends object> = P & T
 /**
  * A type helper.
  *
- * @internal
+ * @public
  */
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }

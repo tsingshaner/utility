@@ -3,25 +3,12 @@ import type { SetReturnType } from 'type-fest'
 import type { AnyAsyncFunc, AnyFunc, AwaitedReturnType } from '../types'
 
 /**
- * Generic result type from a func.
- *
- * @public
- */
-export type ResultFromFunc<T extends AnyFunc, E> = Result<AwaitedReturnType<T>, E>
-/**
  * Wrap async function with error handling.
  * @template T - The typeof provide fn.
  *
  * @public
  */
 export type AsyncSafetyFn<T extends AnyAsyncFunc, E> = SetReturnType<T, Promise<ResultFromFunc<T, E>>>
-/**
- * Wrap sync function with error handling.
- * @template T - The typeof provide fn.
- *
- * @public
- */
-export type SyncSafetyFn<T extends AnyFunc, E> = SetReturnType<T, ResultFromFunc<T, E>>
 /**
  * The result of a function that may throw an error.
  * @remarks
@@ -33,6 +20,19 @@ export type SyncSafetyFn<T extends AnyFunc, E> = SetReturnType<T, ResultFromFunc
  * @public
  */
 export type Result<T, E = Error> = [cause: E, success: false] | [data: T, success: true]
+/**
+ * Generic result type from a func.
+ *
+ * @public
+ */
+export type ResultFromFunc<T extends AnyFunc, E> = Result<AwaitedReturnType<T>, E>
+/**
+ * Wrap sync function with error handling.
+ * @template T - The typeof provide fn.
+ *
+ * @public
+ */
+export type SyncSafetyFn<T extends AnyFunc, E> = SetReturnType<T, ResultFromFunc<T, E>>
 
 /**
  * Wrap an async function to catch the error.

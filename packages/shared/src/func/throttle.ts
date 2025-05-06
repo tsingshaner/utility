@@ -25,28 +25,6 @@ import type { SetReturnType } from 'type-fest'
 import type { AnyFunc, FuncWithProps, Timeout } from '../types'
 
 /**
- * Represents a function that can be throttled.
- *
- * @public
- */
-export type ThrottleWrapper<T extends AnyFunc> = FuncWithProps<
-  SetReturnType<T, void>,
-  {
-    /**
-     * Cancel the feature execution.
-     *
-     * @remarks
-     * If upcomingOnly is true, only skip the next execution in schedule.
-     * If upcomingOnly is false or unspecified, skip all future executions.
-     *
-     * @param upcomingOnly - Weather only skip the upcoming execution.
-     *
-     * @default false
-     */
-    cancel: (upcomingOnly?: boolean) => void
-  }
->
-/**
  * An object to configure throttle options.
  *
  * @import It should be noted that callback will never executed if both leading = false and trailing = true.
@@ -85,6 +63,28 @@ export interface ThrottleOptions {
    */
   trailing: boolean
 }
+/**
+ * Represents a function that can be throttled.
+ *
+ * @public
+ */
+export type ThrottleWrapper<T extends AnyFunc> = FuncWithProps<
+  SetReturnType<T, void>,
+  {
+    /**
+     * Cancel the feature execution.
+     *
+     * @remarks
+     * If upcomingOnly is true, only skip the next execution in schedule.
+     * If upcomingOnly is false or unspecified, skip all future executions.
+     *
+     * @param upcomingOnly - Weather only skip the upcoming execution.
+     *
+     * @default false
+     */
+    cancel: (upcomingOnly?: boolean) => void
+  }
+>
 
 /**
  * Throttle execution of a function. Especially useful for rate limiting.
