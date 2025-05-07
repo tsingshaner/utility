@@ -1,5 +1,18 @@
 # @qingshaner/utility-shared
 
+## 0.5.0
+
+### Minor Changes
+
+- 4445f07: Add download & format bytes func
+
+  - utility-client add `execDownload` func
+  - utility-shared add `formatBytes` func
+
+### Patch Changes
+
+- 9c56abb: Fix type export error
+
 ## 0.4.0
 
 ### Minor Changes
