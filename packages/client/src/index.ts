@@ -3,4 +3,5 @@
  *
  * @packageDocumentation
  */
+export * from './download'
 export * from './media-match'
