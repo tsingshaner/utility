@@ -1,5 +1,18 @@
 # @qingshaner/utility
 
+## 0.6.0
+
+### Minor Changes
+
+- 1b33b98: Add sleep func
+
+### Patch Changes
+
+- Updated dependencies [1b33b98]
+  - @qingshaner/utility-shared@0.6.0
+  - @qingshaner/utility-client@0.6.0
+  - @qingshaner/utility-server@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes
