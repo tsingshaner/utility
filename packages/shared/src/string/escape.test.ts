@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest'
 
-import { escapeHTML, escapeMD } from './escape'
+import { escapeHTML, escapeMD, escapeShellArg, escapeShellArgs } from './escape'
 
 describe('Should escape.', (test) => {
   test.each([
@@ -38,4 +38,20 @@ describe('Should escape.', (test) => {
   ])('Should escape markdown & html text `%s` -> `%s`', (input, expected) =>
     expect(escapeHTML(escapeMD(input))).toBe(expected)
   )
+
+  test.each([['echo', 'echo']])('Should escape shell string %s -> %s', (arg, expected) =>
+    expect(escapeShellArg(arg)).toBe(expected)
+  )
+
+  test.each([
+    [['echo', 'hello\\nworld'], "echo 'hello\\nworld'"],
+    [['echo', 'hello:world'], 'echo hello:world'],
+    [['echo', '--hello=world'], 'echo --hello=world'],
+    [['echo', 'hello\\tworld'], "echo 'hello\\tworld'"],
+    [['echo', "\thello\nworld'"], "echo '\thello\nworld'\\'"],
+    [['echo', 'hello  world'], "echo 'hello  world'"],
+    [['echo', 'hello', 'world'], 'echo hello world'],
+    [['echo', String.raw`hello\\'`, String.raw`'\\'world`], String.raw`echo 'hello\\'\' \''\\'\''world'`],
+    [['echo', 'hello', 'world\\'], "echo hello 'world\\'"]
+  ])('Should escape command args`%s` -> `%s`', (args, expected) => expect(escapeShellArgs(args)).toEqual(expected))
 })
