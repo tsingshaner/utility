@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, vi } from 'vitest'
 
-import { debounce } from './debounce'
+import { debounce, noop } from '.'
 
-const onInput = vi.fn(() => {})
+const onInput = vi.fn(noop)
 
 describe('test debounce', (test) => {
   beforeEach(() => vi.useFakeTimers())

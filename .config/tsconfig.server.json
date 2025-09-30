@@ -24,6 +24,6 @@
     "../**/*/*.config.ts",
     "./*.ts",
     "../scripts",
-    "../vitest.workspace.ts"
+    "../vitest.config.ts"
   ]
 }
