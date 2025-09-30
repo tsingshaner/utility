@@ -1,11 +1,25 @@
 # @qingshaner/utility
 
+## 0.6.0
+
+### Minor Changes
+
+- 1b33b98: Add sleep func
+- 4425796: Add noop func & export shared utils
+
+### Patch Changes
+
+- Updated dependencies [1b33b98]
+- Updated dependencies [4425796]
+  - @qingshaner/utility-shared@0.6.0
+  - @qingshaner/utility-client@0.6.0
+  - @qingshaner/utility-server@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes
 
 - 4445f07: Add download & format bytes func
-
   - utility-client add `execDownload` func
   - utility-shared add `formatBytes` func
 
