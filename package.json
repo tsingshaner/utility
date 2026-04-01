@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@changesets/cli": "^2.29.7",
+    "@changesets/cli": "^2.30.0",
     "@qingshaner/eslint-config": "^0.13.1",
     "@types/node": "^22.18.6",
     "@vitest/coverage-v8": "^3.2.4",
