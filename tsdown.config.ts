@@ -6,6 +6,11 @@ export default defineConfig([
     dts: {
       oxc: true
     },
+    entry: {
+      client: './src/client.ts',
+      index: './src/index.ts',
+      server: './src/server.ts'
+    },
     name: '@qingshaner/utility',
     target: 'es2023'
   },
