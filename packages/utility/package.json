@@ -32,17 +32,14 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.0.0"
-  },
-  "scripts": {
-    "build": "vite build"
+    "node": ">=22.0.0"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "typescript": ">=5.5.0"
+    "typescript": ">=6.0.3"
   },
   "peerDependenciesMeta": {
     "typescript": {

@@ -135,7 +135,7 @@ export function throttle<T extends AnyFunc>(callback: T, options: Partial<Thrott
    * functionality and when executed will limit the rate at which `callback`
    * is executed.
    */
-  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: todo: refactor this
   const wrapper = function (this: ThisType<T>, ...args: Parameters<T>): void {
     if (cancelled) {
       return

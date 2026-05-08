@@ -5,16 +5,14 @@
     "target": "ESNext",
 
     "lib": ["ESNext"],
-    "types": ["node"],
-
-    "baseUrl": "..",
     "rootDir": "..",
     "paths": {
-      "@qingshaner/utility": ["src"],
-      "@qingshaner/utility-client": ["packages/client/src"],
-      "@qingshaner/utility-node": ["packages/node/src"],
-      "@qingshaner/utility-shared": ["packages/shared/src"]
-    }
+      "@qingshaner/utility": ["../packages/utility/src"],
+      "@qingshaner/utility-client": ["../packages/client/src"],
+      "@qingshaner/utility-node": ["../packages/node/src"],
+      "@qingshaner/utility-shared": ["../packages/shared/src"]
+    },
+    "types": ["node"]
   },
   "include": [
     "../packages/server/src",

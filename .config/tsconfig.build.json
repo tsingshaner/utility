@@ -7,7 +7,6 @@
     "lib": ["ESNext", "DOM"],
     "types": ["node"],
 
-    "baseUrl": "..",
     "rootDir": ".."
   },
   "include": ["../packages/*/src"]

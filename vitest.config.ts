@@ -11,7 +11,7 @@ export default defineConfig({
           ...configDefaults,
           alias: [
             {
-              find: /@qingshaner\/utility\-([\w-]+)$/,
+              find: /@qingshaner\/utility-([\w-]+)$/,
               replacement: fileURLToPath(new URL('packages/$1/src', import.meta.url))
             },
             {

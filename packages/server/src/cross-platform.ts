@@ -5,7 +5,7 @@ import process from 'node:process'
  *
  * @public
  */
-export const IS_WIN = process.platform === 'win32'
+export const IS_WIN: boolean = process.platform === 'win32'
 
 const parsePathKey = (opts: Pick<NodeJS.Process, 'env' | 'platform'>): string => {
   if (!IS_WIN) {

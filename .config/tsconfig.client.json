@@ -6,15 +6,13 @@
 
     "lib": ["ES2023", "DOM"],
 
-    "baseUrl": "..",
     "rootDir": "..",
     "paths": {
-      "@qingshaner/utility-client": ["packages/client/src"],
-      "@qingshaner/utility-shared": ["packages/shared/src"]
+      "@qingshaner/utility-client": ["../packages/client/src"],
+      "@qingshaner/utility-shared": ["../packages/shared/src"]
     }
   },
   "include": [
-    "../src",
     "../packages/client/src",
     "../packages/shared/src",
     "../packages/utility/src/client.ts"

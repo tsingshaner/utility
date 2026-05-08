@@ -36,6 +36,5 @@ describe('Should escape.', (test) => {
     ['"a" | "b"', String.raw`&quot;a&quot; \| &quot;b&quot;`],
     ['*bold*', String.raw`\*bold\*`]
   ])('Should escape markdown & html text `%s` -> `%s`', (input, expected) =>
-    expect(escapeHTML(escapeMD(input))).toBe(expected)
-  )
+    expect(escapeHTML(escapeMD(input))).toBe(expected))
 })

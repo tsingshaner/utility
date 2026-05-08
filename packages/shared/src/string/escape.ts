@@ -1,4 +1,4 @@
-const htmlEscapeRE = /["\/&<>']/g
+const htmlEscapeRE = /["/&<>']/g
 
 /**
  * Escape HTML content.
@@ -48,7 +48,7 @@ export const unescapeHTML = (text: string): string => {
     .replace(/&#39;/g, "'")
 }
 
-const mdEscapeRE = /([\[\]|*_~`\\{}()#+-.!])/g
+const mdEscapeRE = /([[\]|*_~`\\{}()#+-.!])/g
 
 /**
  * Escape markdown content.

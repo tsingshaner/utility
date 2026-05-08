@@ -1,18 +1,6 @@
 {
   "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["@qingshaner/eslint-config/biome"],
-  "overrides": [
-    {
-      "include": ["*.test.ts", "*.bench.ts"],
-      "linter": {
-        "rules": {
-          "nursery": {
-            "useExplicitType": "off"
-          }
-        }
-      }
-    }
-  ],
   "linter": {
     "rules": {
       "correctness": {
@@ -22,5 +10,27 @@
         "useExplicitType": "warn"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.test.ts", "**/*.bench.ts"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useExplicitType": "off"
+          }
+        }
+      }
+    },
+    {
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "off"
+          }
+        }
+      },
+      "includes": [".config/tsconfig.*.json", "tsconfig.json", "**/*/package.json", "package.json"]
+    }
+  ]
 }

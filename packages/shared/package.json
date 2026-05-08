@@ -11,30 +11,25 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dits/index.js"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "files": [
     "dist"
   ],
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "scripts": {
-    "build": "vite build"
-  },
   "peerDependencies": {
     "@types/node": "^22.13.10",
-    "typescript": ">=5.5.0"
+    "typescript": ">=6.0.3"
   },
   "peerDependenciesMeta": {
     "@types/node": {
@@ -46,6 +41,6 @@
   },
   "dependencies": {
     "klona": "^2.0.6",
-    "type-fest": "^4.41.0"
+    "type-fest": "^5.6.0"
   }
 }
