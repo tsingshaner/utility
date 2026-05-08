@@ -7,6 +7,14 @@
     "name": "qingshaner",
     "url": "https://github.com/Jon-a-than"
   },
+  "keywords": [
+    "utility",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsingshaner/utility.git"
+  },
   "license": "ISC",
   "sideEffects": false,
   "exports": {

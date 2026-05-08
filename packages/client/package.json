@@ -12,6 +12,10 @@
     "browser",
     "typescript"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsingshaner/utility.git"
+  },
   "sideEffects": false,
   "exports": {
     ".": {

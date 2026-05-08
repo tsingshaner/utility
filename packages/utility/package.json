@@ -9,6 +9,14 @@
   },
   "license": "ISC",
   "sideEffects": false,
+  "keywords": [
+    "utility",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsingshaner/utility.git"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
