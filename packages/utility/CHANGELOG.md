@@ -1,5 +1,18 @@
 # @qingshaner/utility
 
+## 1.0.0
+
+### Major Changes
+
+- 6be3b30: Breaking Change: support esm only
+
+### Patch Changes
+
+- Updated dependencies [6be3b30]
+  - @qingshaner/utility-client@1.0.0
+  - @qingshaner/utility-server@1.0.0
+  - @qingshaner/utility-shared@1.0.0
+
 ## 0.6.0
 
 ### Minor Changes
