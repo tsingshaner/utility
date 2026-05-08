@@ -5,7 +5,10 @@ import { debounce, noop } from '.'
 const onInput = vi.fn(noop)
 
 describe('test debounce', (test) => {
-  beforeEach(() => vi.useFakeTimers())
+  beforeEach(() => {
+    vi.useFakeTimers()
+    vi.clearAllMocks()
+  })
   afterEach(() => {
     vi.clearAllTimers()
     vi.restoreAllMocks()
@@ -17,16 +20,16 @@ describe('test debounce', (test) => {
 
     expect(onInput).not.toHaveBeenCalled()
     vi.advanceTimersByTime(100)
-    expect(onInput).toBeCalledTimes(1)
+    expect(onInput).toHaveBeenCalledTimes(1)
 
     const timer = setInterval(fn, 10)
     setTimeout(() => clearInterval(timer), 1000)
 
     vi.advanceTimersByTime(1099)
-    expect(onInput).toBeCalledTimes(1)
+    expect(onInput).toHaveBeenCalledTimes(1)
 
     vi.advanceTimersByTime(10100)
-    expect(onInput).toBeCalledTimes(2)
+    expect(onInput).toHaveBeenCalledTimes(2)
   })
 
   test('test at begin (leading)', ({ expect }) => {
@@ -34,17 +37,17 @@ describe('test debounce', (test) => {
     fn()
     fn()
 
-    expect(onInput).toBeCalledTimes(1)
+    expect(onInput).toHaveBeenCalledTimes(1)
 
     vi.advanceTimersByTime(100)
     fn()
 
-    expect(onInput).toBeCalledTimes(2)
+    expect(onInput).toHaveBeenCalledTimes(2)
 
     vi.advanceTimersByTime(50)
     fn()
 
-    expect(onInput).toBeCalledTimes(2)
+    expect(onInput).toHaveBeenCalledTimes(2)
   })
 
   test('test cancel', ({ expect }) => {

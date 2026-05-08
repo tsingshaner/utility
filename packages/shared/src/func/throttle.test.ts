@@ -5,7 +5,10 @@ import { throttle } from './throttle'
 const onMessage = vi.fn((_msg?: string) => 0)
 
 describe('test throttle', (test) => {
-  beforeEach(() => vi.useFakeTimers())
+  beforeEach(() => {
+    vi.useFakeTimers()
+    vi.clearAllMocks()
+  })
   afterEach(() => {
     vi.clearAllTimers()
     vi.restoreAllMocks()
