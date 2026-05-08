@@ -1,5 +1,11 @@
 # @qingshaner/utility-shared
 
+## 1.0.0
+
+### Major Changes
+
+- 6be3b30: Breaking Change: support esm only
+
 ## 0.6.0
 
 ### Minor Changes
