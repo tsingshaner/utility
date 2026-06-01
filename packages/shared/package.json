@@ -50,6 +50,6 @@
   },
   "dependencies": {
     "klona": "^2.0.6",
-    "type-fest": "^5.6.0"
+    "type-fest": "^5.7.0"
   }
 }
