@@ -1,5 +1,14 @@
 # @qingshaner/utility
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [37cf6d9]
+  - @qingshaner/utility-shared@1.0.2
+  - @qingshaner/utility-client@1.0.2
+  - @qingshaner/utility-server@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
