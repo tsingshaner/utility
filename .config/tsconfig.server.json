@@ -10,7 +10,8 @@
       "@qingshaner/utility": ["../packages/utility/src"],
       "@qingshaner/utility-client": ["../packages/client/src"],
       "@qingshaner/utility-node": ["../packages/node/src"],
-      "@qingshaner/utility-shared": ["../packages/shared/src"]
+      "@qingshaner/utility-shared": ["../packages/shared/src"],
+      "@qingshaner/utility-hono": ["../packages/hono/src"]
     },
     "types": ["node"]
   },
@@ -19,6 +20,7 @@
     "../packages/shared/src",
     "../packages/utility/src/server.ts",
     "../packages/utility/src/index.ts",
+    "../packages/hono/src",
     "../**/*/*.config.ts",
     "./*.ts",
     "../scripts",

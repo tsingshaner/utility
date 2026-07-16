@@ -37,5 +37,17 @@ export default defineConfig([
     },
     name: '@qingshaner/utility-client',
     target: 'es2023'
+  },
+  {
+    cwd: 'packages/hono',
+    dts: {
+      tsgo: true
+    },
+    entry: {
+      index: './src/index.ts',
+      middlewares: './src/middlewares/index.ts'
+    },
+    name: '@qingshaner/utility-hono',
+    target: 'es2024'
   }
 ])

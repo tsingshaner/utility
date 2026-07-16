@@ -1,27 +1,32 @@
 {
-  "name": "@qingshaner/utility-shared",
+  "name": "@qingshaner/utility-hono",
   "type": "module",
-  "version": "1.0.1",
-  "description": "Utilities from JavaScript & TypeScript.",
+  "version": "0.0.0",
   "author": {
     "name": "qingshaner",
     "url": "https://github.com/Jon-a-than"
   },
+  "license": "ISC",
   "keywords": [
     "utility",
+    "hono",
     "typescript"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tsingshaner/utility.git"
   },
-  "license": "ISC",
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs",
       "default": "./dist/index.mjs"
+    },
+    "./middlewares": {
+      "types": "./dist/middlewares.d.mts",
+      "import": "./dist/middlewares.mjs",
+      "default": "./dist/middlewares.mjs"
     }
   },
   "main": "dist/index.mjs",
@@ -37,19 +42,27 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "@types/node": "^22.13.10",
-    "typescript": ">=6.0.3"
+    "@logtape/logtape": ">=2.1.5 <3",
+    "hono": "^4.0.0",
+    "typescript": ">=6.0.3",
+    "valibot": ">= 1.4.0 <2"
   },
   "peerDependenciesMeta": {
-    "@types/node": {
+    "@logtape/logtape": {
       "optional": true
+    },
+    "hono": {
+      "optional": false
     },
     "typescript": {
       "optional": true
+    },
+    "valibot": {
+      "optional": false
     }
   },
   "dependencies": {
-    "klona": "^2.0.6",
-    "type-fest": "^5.8.0"
+    "@hono/standard-validator": "^0.3.0",
+    "@standard-schema/spec": "^1.1.0"
   }
 }
