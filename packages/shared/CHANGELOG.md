@@ -1,5 +1,11 @@
 # @qingshaner/utility-shared
 
+## 1.0.2
+
+### Patch Changes
+
+- 37cf6d9: - Update the `type-fest` runtime dependency to version 5.8.0.
+
 ## 1.0.1
 
 ### Patch Changes
