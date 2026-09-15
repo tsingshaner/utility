@@ -1,3 +1,5 @@
+export type * as TypeFest from 'type-fest'
+
 export * from './array'
 export * from './async'
 export * from './func'
@@ -5,5 +7,5 @@ export * from './math'
 export * from './object'
 export * from './string'
 export * from './type-guard'
+
 export type * from './types'
-export type * as TypeFest from 'type-fest'

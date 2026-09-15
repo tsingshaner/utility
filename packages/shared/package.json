@@ -37,7 +37,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "@types/node": "^22.13.10",
+    "@types/node": ">=22.13.10",
     "typescript": ">=6.0.3"
   },
   "peerDependenciesMeta": {
@@ -50,6 +50,6 @@
   },
   "dependencies": {
     "klona": "^2.0.6",
-    "type-fest": "^5.8.0"
+    "type-fest": "^5.9.0"
   }
 }

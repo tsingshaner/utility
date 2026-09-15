@@ -2,7 +2,7 @@
   "name": "utility",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@11.0.8",
+  "packageManager": "pnpm@12.4.1",
   "description": "Some utilities for JavaScript & TypeScript projects",
   "author": {
     "name": "qingshaner",
@@ -25,34 +25,34 @@
     "build": "tsdown",
     "changeset-version": "changeset version && pnpx @qingshaner/jsr-release version --allowDirty --sync",
     "changeset-publish": "changeset publish",
-    "format": "biome format . --write",
-    "lint": "biome lint . --write && eslint . --fix",
+    "check": "biome check . --write",
+    "check:cspell": "cspell . --no-summary --no-progress --gitignore",
+    "check:type": "tsc --build --noEmit",
+    "check:knip": "knip",
     "prepare": "simple-git-hooks",
     "test": "vitest run",
     "test:cov": "vitest run --coverage"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.4",
-    "@changesets/cli": "^2.31.0",
-    "@qingshaner/eslint-config": "^2.0.0",
-    "@types/node": "^22.20.1",
-    "@vitest/coverage-v8": "^4.1.10",
-    "eslint": "^10.7.0",
-    "lint-staged": "^17.0.8",
-    "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.22.8",
+    "@biomejs/biome": "^2.5.13",
+    "@changesets/cli": "^2.31.1",
+    "@qingshaner/devtools": "^0.0.3",
+    "@types/node": "^22.20.2",
+    "@vitest/coverage-v8": "^5.0.0",
+    "cspell": "^10.3.1",
+    "knip": "^6.35.1",
+    "nano-staged": "^1.0.2",
+    "simple-git-hooks": "^2.14.0",
+    "tsdown": "^0.22.14",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged",
-    "pre-push": "pnpm test"
+    "pre-commit": "pnpm nano-staged",
+    "pre-push": "pnpm run '/(test|check|check:cspell|check:type|check:knip)/'"
   },
-  "lint-staged": {
-    "*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": [
-      "pnpm biome lint --write",
-      "pnpm eslint --cache --fix"
-    ],
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}": "pnpm biome format --write"
+  "nano-staged": {
+    "*": "pnpm cspell --no-summary --no-progress --no-must-find-files --file-list",
+    "*.{json,jsonc,js,jsx,cjs,mjs,ts,tsx,cts,mts,html,svg,css,vue}": "pnpm biome check --fix --files-ignore-unknown=true --no-errors-on-unmatched"
   }
 }

@@ -3,6 +3,8 @@
  *
  * @packageDocumentation
  */
+
+export * from '@qingshaner/utility-shared'
+
 export * from './download'
 export * from './media-match'
-export * from '@qingshaner/utility-shared'

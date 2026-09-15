@@ -9,7 +9,7 @@
     "paths": {
       "@qingshaner/utility": ["../packages/utility/src"],
       "@qingshaner/utility-client": ["../packages/client/src"],
-      "@qingshaner/utility-node": ["../packages/node/src"],
+      "@qingshaner/utility-server": ["../packages/server/src"],
       "@qingshaner/utility-shared": ["../packages/shared/src"],
       "@qingshaner/utility-hono": ["../packages/hono/src"]
     },

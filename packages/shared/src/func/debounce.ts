@@ -1,4 +1,4 @@
-import { throttle, type ThrottleOptions, type ThrottleWrapper } from './throttle'
+import { type ThrottleOptions, type ThrottleWrapper, throttle } from './throttle'
 
 import type { AnyFunc } from '../types'
 

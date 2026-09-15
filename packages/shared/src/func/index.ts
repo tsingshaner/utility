@@ -1,7 +1,8 @@
-export { debounce, type DebounceOptions } from './debounce'
+export { type DebounceOptions, debounce } from './debounce'
 export { asyncSafety, syncSafety } from './safety'
+export { type ThrottleOptions, type ThrottleWrapper, throttle } from './throttle'
+
 export type { AsyncSafetyFn, Result, ResultFromFunc, SyncSafetyFn } from './safety'
-export { throttle, type ThrottleOptions, type ThrottleWrapper } from './throttle'
 
 /**
  * A no-operation function that does nothing.

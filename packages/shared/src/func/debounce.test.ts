@@ -11,6 +11,7 @@ describe('test debounce', (test) => {
   })
   afterEach(() => {
     vi.clearAllTimers()
+    vi.useRealTimers()
     vi.restoreAllMocks()
   })
 
@@ -23,12 +24,13 @@ describe('test debounce', (test) => {
     expect(onInput).toHaveBeenCalledTimes(1)
 
     const timer = setInterval(fn, 10)
-    setTimeout(() => clearInterval(timer), 1000)
+    vi.advanceTimersByTime(1000)
+    clearInterval(timer)
 
-    vi.advanceTimersByTime(1099)
+    vi.advanceTimersByTime(99)
     expect(onInput).toHaveBeenCalledTimes(1)
 
-    vi.advanceTimersByTime(10100)
+    vi.advanceTimersByTime(1)
     expect(onInput).toHaveBeenCalledTimes(2)
   })
 

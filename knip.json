@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip/schema.json",
+  "workspaces": {
+    "packages/hono": {
+      "entry": ["src/index.ts", "src/middlewares/index.ts"]
+    },
+    "packages/utility": {
+      "entry": ["src/index.ts", "src/client.ts", "src/server.ts"]
+    }
+  }
+}

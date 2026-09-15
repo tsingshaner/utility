@@ -29,7 +29,7 @@ jobs:
         run: pnpm i
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm run '/^check(:.*)?$/'
 
       - name: Unit test
         run: pnpm test:cov
