@@ -9,4 +9,4 @@
 <a href="https://biomejs.dev" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome"></a>
 </p>
 
-Utitliy for orpc project
+Utility for orpc project
