@@ -49,5 +49,18 @@ export default defineConfig([
     },
     name: '@qingshaner/utility-hono',
     target: 'es2024'
+  },
+  {
+    cwd: 'packages/orpc',
+    dts: {
+      oxc: true
+    },
+    entry: {
+      context: './src/context/index.ts',
+      index: './src/index.ts',
+      timing: './src/timing/index.ts'
+    },
+    name: '@qingshaner/utility-orpc',
+    target: 'es2024'
   }
 ])

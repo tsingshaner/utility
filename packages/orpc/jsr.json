@@ -1,0 +1,9 @@
+{
+  "$schema": "https://jsr.io/schema/config-file.v1.json",
+  "exports": "./src/index.ts",
+  "name": "@qingshaner/utility-orpc",
+  "publish": {
+    "include": ["LICENSE", "README.md", "src/**/*.ts"]
+  },
+  "version": "0.1.0"
+}

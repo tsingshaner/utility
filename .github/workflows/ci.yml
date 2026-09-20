@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+
 jobs:
   unit-test:
     runs-on: ubuntu-latest
@@ -29,11 +32,11 @@ jobs:
         run: pnpm i
 
       - name: Lint
-        run: pnpm run '/^check(:.*)?$/'
+        run: pnpm run '/check/'
 
       - name: Unit test
         run: pnpm test:cov
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v7
+        with:
+          use_oidc: true

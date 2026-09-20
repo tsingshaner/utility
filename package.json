@@ -49,7 +49,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm nano-staged",
-    "pre-push": "pnpm run '/(test|check|check:cspell|check:type|check:knip)/'"
+    "pre-push": "pnpm run '/(test|check)/'"
   },
   "nano-staged": {
     "*": "pnpm cspell --no-summary --no-progress --no-must-find-files --file-list",

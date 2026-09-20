@@ -11,7 +11,8 @@
       "@qingshaner/utility-client": ["../packages/client/src"],
       "@qingshaner/utility-server": ["../packages/server/src"],
       "@qingshaner/utility-shared": ["../packages/shared/src"],
-      "@qingshaner/utility-hono": ["../packages/hono/src"]
+      "@qingshaner/utility-hono": ["../packages/hono/src"],
+      "@qingshaner/utility-orpc": ["../packages/orpc/src"]
     },
     "types": ["node"]
   },
