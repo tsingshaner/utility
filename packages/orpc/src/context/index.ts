@@ -23,7 +23,7 @@ export type AppContext = {
 }
 
 /** Configuration for {@link AppContextPlugin}. */
-interface AppContextPluginOptions {
+interface AppContextPluginOptions<T extends Context = Context> {
   /** Features to enable. Defaults to `{ requestId: true, serverTiming: false }`. */
   features?: {
     /** Generate, propagate, and return a request ID. Defaults to `true`. */
@@ -33,7 +33,34 @@ interface AppContextPluginOptions {
   }
   /** Response/request header used for the request ID. Defaults to `X-Request-ID`. */
   requestIdHeader?: string
+  /**
+   * Resolves an upstream request ID synchronously from the fetch interceptor options.
+   *
+   * When provided, this callback replaces the default lookup of
+   * `requestIdHeader` in the incoming request. Returning `null` or `undefined`
+   * generates a new UUID; it does not fall back to the incoming header.
+   * Returning an empty string suppresses the context request ID and response
+   * header without generating a UUID. The callback is not invoked when
+   * `features.requestId` is `false`.
+   *
+   * The resolved ID is exposed through {@link getAppContext} and written to
+   * `requestIdHeader` on matched responses. Callback errors propagate to the
+   * caller before downstream interceptors run.
+   *
+   * @param options - Fetch interceptor options, including the request and oRPC context.
+   * @returns The upstream ID, or a nullish value to generate a new UUID.
+   *
+   * @example
+   * ```ts
+   * new AppContextPlugin({
+   *   getParentRequestId: ({ request }) => request.headers.get('X-Upstream-Request-ID'),
+   * })
+   * ```
+   */
+  getParentRequestId?: (options: Parameters<FetchHandlerFetchInterceptor<T>>[0]) => string | undefined | null
 }
+
+type FetchInterceptorOptions<T extends Context> = Parameters<FetchHandlerFetchInterceptor<T>>[0]
 
 /**
  * Installs request-local context for an oRPC fetch handler.
@@ -60,20 +87,20 @@ export class AppContextPlugin<T extends Context> implements FetchHandlerPlugin<T
 
   #requestIdHeader: string
   #features: Required<AppContextPluginOptions>['features']
+  #getRequestId: (options: FetchInterceptorOptions<T>) => string | null | undefined
   /**
-   * @param options - Feature flags and an optional request-ID header name.
+   * @param options - Feature flags, request-ID header name, and an optional upstream ID resolver.
    */
-  constructor({ requestIdHeader, features = {} }: AppContextPluginOptions = {}) {
+  constructor({ requestIdHeader, features = {}, getParentRequestId }: AppContextPluginOptions = {}) {
     this.#requestIdHeader = requestIdHeader ?? 'X-Request-ID'
     this.#features = { requestId: true, serverTiming: false, ...features }
+    this.#getRequestId = getParentRequestId
+      ? (options: FetchInterceptorOptions<T>): string | null | undefined => getParentRequestId(options)
+      : (options: FetchInterceptorOptions<T>): string | null => options.request.headers.get(this.#requestIdHeader)
   }
 
-  #getRequestId = (headers: Headers): string => headers.get(this.#requestIdHeader) || crypto.randomUUID()
-
-  #interceptor = (
-    options: Parameters<FetchHandlerFetchInterceptor<T>>[0]
-  ): ReturnType<FetchHandlerFetchInterceptor<T>> => {
-    const requestId = this.#features.requestId && this.#getRequestId(options.request.headers)
+  #interceptor = (options: FetchInterceptorOptions<T>): ReturnType<FetchHandlerFetchInterceptor<T>> => {
+    const requestId = this.#features.requestId && (this.#getRequestId(options) ?? crypto.randomUUID())
     const serverTiming = this.#features.serverTiming ? [] : undefined
     const appContext: AppContext = { requestId: requestId || undefined }
 
