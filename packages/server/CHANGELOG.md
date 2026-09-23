@@ -1,5 +1,15 @@
 # @qingshaner/utility-server
 
+## 1.2.0
+
+### Minor Changes
+
+- 0c45c44: Add `loadEnvFiles` to load multiple environment files in order using Node.js, continuing when an individual file cannot be loaded.
+
+### Patch Changes
+
+- @qingshaner/utility-shared@1.2.0
+
 ## 1.1.0
 
 ### Minor Changes
