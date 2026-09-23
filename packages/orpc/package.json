@@ -38,7 +38,7 @@
   },
   "type": "module",
   "types": "dist/index.d.mts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "peerDependencies": {
     "@orpc/server": ">=2.0.0-beta.36",
     "typescript": ">=7.0.2"
