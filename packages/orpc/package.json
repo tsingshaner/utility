@@ -8,7 +8,7 @@
   },
   "description": "Utility for orpc project",
   "devDependencies": {
-    "@orpc/server": "^2.0.0-beta.36"
+    "@orpc/server": "^2.0.0-beta.40"
   },
   "engines": {
     "node": "^22.18.0 || ^24.11.0 || >=26.0.0",

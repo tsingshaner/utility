@@ -1,6 +1,7 @@
 import { glob, readFile, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
+import { COMMON_ERROR_STATUS_MAP } from '@orpc/server'
 import { createUnplugin, type FilterPattern, type UnpluginFactory } from 'unplugin'
 
 interface Options {
@@ -11,11 +12,28 @@ interface Options {
 
 const ERROR_CODE_RE = /(['"`])([A-Z][A-Z0-9_]*::[A-Z][A-Z0-9_]*)\1/g
 
+const ERROR_CODE_FILTER_RE = /(['"`])([A-Z][A-Z0-9_]*::[A-Z][A-Z0-9_]*)\1/
+
+const normalizeId = (id: string): string => resolve(id.split('?')[0])
+
+const getStatusCode = (errorCode: string): number => {
+  const prefix = errorCode.split('::')[0]
+
+  if (!(prefix in COMMON_ERROR_STATUS_MAP)) {
+    throw new Error(`[error-code-map] Unknown error code prefix "${prefix}" in "${errorCode}"`)
+  }
+
+  return COMMON_ERROR_STATUS_MAP[prefix as keyof typeof COMMON_ERROR_STATUS_MAP]
+}
+
 const unpluginFactory: UnpluginFactory<Options | undefined> = (options?: Options) => {
   const sourceDirs = options?.sourceDirs ?? ['./src']
+
   const outputFile = resolve(options?.outputFile ?? './src/error-code-map.gen.ts')
 
   const moduleCodes = new Map<string, Set<string>>()
+
+  let lastContent = ''
 
   const collect = (source: string): Set<string> => {
     const codes = new Set<string>()
@@ -38,24 +56,35 @@ const unpluginFactory: UnpluginFactory<Options | undefined> = (options?: Options
       }
     }
 
-    const codes = [...errorCodes].sort()
+    const sortedCodes = [...errorCodes].sort()
 
-    await writeFile(
-      outputFile,
-      `// This file is auto-generated. Do not edit.
+    const content = `// This file is auto-generated. Do not edit.
+import { COMMON_ERROR_STATUS_MAP } from '@orpc/openapi'
 
-export const errorCodes = ${JSON.stringify(codes, null, 2)} as const
+export type ErrorCode = ${sortedCodes.length > 0 ? sortedCodes.map((code) => `'${code}'`).join(' | ') : 'never'}
 
-export type ErrorCode = (typeof errorCodes)[number]
+export const ErrorStatusMap = {
+  ...COMMON_ERROR_STATUS_MAP,
+${sortedCodes.map((code) => `  '${code}': ${getStatusCode(code)},`).join('\n')}
+} as const
+`
 
-export const errorCodeSet: ReadonlySet<ErrorCode> =
-  new Set(errorCodes)
+    if (content === lastContent) {
+      return
+    }
 
-export const isErrorCode = (value: string): value is ErrorCode =>
-  errorCodeSet.has(value as ErrorCode)
-`,
-      'utf8'
-    )
+    try {
+      if ((await readFile(outputFile, 'utf8')) === content) {
+        lastContent = content
+        return
+      }
+    } catch {
+      // generated file does not exist yet
+    }
+
+    lastContent = content
+
+    await writeFile(outputFile, content, 'utf8')
   }
 
   const scanAll = async (): Promise<void> => {
@@ -66,7 +95,7 @@ export const isErrorCode = (value: string): value is ErrorCode =>
         cwd,
         exclude: ['**/*.gen.ts']
       })) {
-        const id = join(cwd, file)
+        const id = normalizeId(join(cwd, file))
         const source = await readFile(id, 'utf8')
 
         moduleCodes.set(id, collect(source))
@@ -77,12 +106,6 @@ export const isErrorCode = (value: string): value is ErrorCode =>
   }
 
   return {
-    /**
-     * 关键：
-     *
-     * 在 Rollup/Vite/Rolldown 开始加载入口模块之前，
-     * 先把 error-code-map.gen.ts 生成出来。
-     */
     async buildStart(): Promise<void> {
       await scanAll()
     },
@@ -90,7 +113,7 @@ export const isErrorCode = (value: string): value is ErrorCode =>
 
     transform: {
       filter: {
-        code: /(['"`])([A-Z][A-Z0-9_]*::[A-Z][A-Z0-9_]*)\1/,
+        code: ERROR_CODE_FILTER_RE,
         id: {
           exclude: [/node_modules/, /dist/, /error-code-map\.gen\.ts$/],
           include: options?.include ?? /\.ts$/
@@ -98,32 +121,27 @@ export const isErrorCode = (value: string): value is ErrorCode =>
       },
 
       async handler(code: string, id: string): Promise<void> {
-        moduleCodes.set(id, collect(code))
+        moduleCodes.set(normalizeId(id), collect(code))
 
-        // dev / HMR 时更新生成文件
         await generate()
       }
     },
 
-    async watchChange(
-      id: string,
-      change: {
-        event: 'create' | 'update' | 'delete'
-      }
-    ): Promise<void> {
+    async watchChange(id: string, change: { event: 'create' | 'update' | 'delete' }): Promise<void> {
+      const normalizedId = normalizeId(id)
+
       if (change.event === 'delete') {
-        moduleCodes.delete(id)
+        moduleCodes.delete(normalizedId)
         await generate()
         return
       }
 
-      // 新版本如果已经没有 ERROR::CODE，
-      // code filter 不会进入 transform，因此这里重新读取最可靠。
       try {
-        const source = await readFile(id, 'utf8')
-        moduleCodes.set(id, collect(source))
+        const source = await readFile(normalizedId, 'utf8')
+
+        moduleCodes.set(normalizedId, collect(source))
       } catch {
-        moduleCodes.delete(id)
+        moduleCodes.delete(normalizedId)
       }
 
       await generate()
