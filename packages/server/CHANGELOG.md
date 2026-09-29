@@ -1,5 +1,12 @@
 # @qingshaner/utility-server
 
+## 1.2.1
+
+### Patch Changes
+
+- Updated dependencies [1a1deac]
+  - @qingshaner/utility-shared@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes

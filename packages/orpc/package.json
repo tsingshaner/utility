@@ -44,7 +44,7 @@
   },
   "type": "module",
   "types": "dist/index.d.mts",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "peerDependencies": {
     "@orpc/server": ">=2.0.0-beta.36",
     "nitro": "^3.0.260903-beta",
