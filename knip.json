@@ -4,6 +4,9 @@
     "packages/hono": {
       "entry": ["src/index.ts", "src/middlewares/index.ts"]
     },
+    "packages/orpc": {
+      "entry": ["src/index.ts", "src/plugin/rolldown.ts"]
+    },
     "packages/utility": {
       "entry": ["src/index.ts", "src/client.ts", "src/server.ts"]
     }

@@ -56,9 +56,8 @@ export default defineConfig([
       oxc: true
     },
     entry: {
-      context: './src/context/index.ts',
       index: './src/index.ts',
-      timing: './src/timing/index.ts'
+      'plugin/rolldown': './src/plugin/rolldown.ts'
     },
     name: '@qingshaner/utility-orpc',
     target: 'es2024'

@@ -19,6 +19,11 @@
       "default": "./dist/index.mjs",
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.mts"
+    },
+    "./plugin/rolldown": {
+      "default": "./dist/plugin/rolldown.mjs",
+      "import": "./dist/plugin/rolldown.mjs",
+      "types": "./dist/plugin/rolldown.d.mts"
     }
   },
   "files": [
@@ -52,6 +57,7 @@
     }
   },
   "dependencies": {
-    "@opentelemetry/api": "^1.9.1"
+    "@opentelemetry/api": "^1.9.1",
+    "unplugin": "^3.4.0"
   }
 }
