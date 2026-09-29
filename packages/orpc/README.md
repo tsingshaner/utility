@@ -14,27 +14,32 @@ Request context, timing helpers, and error status map generation for oRPC projec
 ## Installation
 
 ```sh
-pnpm add @qingshaner/utility-orpc @orpc/server
+pnpm add @qingshaner/utility-orpc @orpc/server nitro
 ```
 
 ## Request context
 
-Add `AppContextPlugin` to an oRPC fetch handler to make request-local values
-available through `getAppContext()` across asynchronous calls.
+Register `nitroPlugin` as a Nitro runtime plugin. It makes request-local values
+available through `getAppContext()` across asynchronous calls, including oRPC handlers.
 
 ```ts
-import { RPCHandler } from '@orpc/server/fetch'
-import { AppContextPlugin } from '@qingshaner/utility-orpc'
+// server/plugins/context.ts
+import { nitroPlugin } from '@qingshaner/utility-orpc'
 
-const handler = new RPCHandler(router, {
-  plugins: [new AppContextPlugin({ features: { serverTiming: true } })],
+export default nitroPlugin({
+  features: { serverTiming: true },
+  logger: console,
 })
 ```
 
-Request IDs are enabled by default. The plugin reads `X-Request-ID` from the
-request, generates a UUID when the header is absent, and returns the ID on matched
-responses. Use `requestIdHeader` to change the header name or
-`features.requestId: false` to disable this feature.
+The optional `logger` accepts an object with `debug(message, props)` and
+`info(message, props)` methods. Both may return promises, which the plugin awaits.
+Omit `logger` to disable request logging.
+
+Request IDs are enabled by default. The plugin reads `X-Request-ID`, generates a
+UUID when the header is absent, propagates it to the request, and returns it on
+responses. Use `requestIdHeader` to change the header or `features.requestId: false`
+to disable request IDs. Server-Timing collection is disabled by default.
 
 ```ts
 import { getAppContext } from '@qingshaner/utility-orpc'
@@ -43,19 +48,25 @@ const requestId = getAppContext()?.requestId
 ```
 
 `getAppContext()` returns `undefined` outside a request managed by the plugin.
-Server-Timing collection is disabled by default.
+The plugin wraps Nitro's fetch entry point using Node.js `AsyncLocalStorage`;
+it does not require Nitro's experimental async-context option.
 
 To resolve an upstream request ID yourself, provide `getParentRequestId`:
 
 ```ts
-new AppContextPlugin({
-  getParentRequestId: ({ request }) => request.headers.get('X-Upstream-Request-ID'),
+nitroPlugin({
+  getParentRequestId: ({ req }) => req.headers.get('X-Upstream-Request-ID'),
 })
 ```
 
 This callback replaces the default header lookup. Returning `null` or `undefined`
-generates a UUID; returning an empty string suppresses the request ID. The callback
-is skipped when request IDs are disabled.
+generates a UUID; returning an empty string suppresses the context and response
+request ID. The callback is skipped when request IDs are disabled.
+
+This replaces the previous oRPC `AppContextPlugin`: remove it from the handler's
+`plugins` array and register the Nitro plugin above. Existing timing helpers remain
+available. Register shutdown callbacks with `onShutdown(fn)`; Nitro's close hook
+runs all callbacks through `cleanup()` and waits for them to settle.
 
 ## Timing
 

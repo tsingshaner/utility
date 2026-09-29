@@ -94,7 +94,7 @@ export const endTime = (name: string, precision?: number): void => {
  * Executes an operation while reporting its duration to Server-Timing and
  * OpenTelemetry.
  *
- * When called inside an {@link AppContextPlugin} request with the
+ * When called inside an {@link nitroPlugin} request with the
  * `serverTiming` feature enabled, the completed operation is appended to the
  * response's `Server-Timing` header. Metric names are normalized to header-safe
  * characters and descriptions are escaped before being written.
