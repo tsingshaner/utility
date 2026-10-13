@@ -34,6 +34,16 @@ const unpluginFactory: UnpluginFactory<Options | undefined> = (options?: Options
   const moduleCodes = new Map<string, Set<string>>()
 
   let lastContent = ''
+  let pending: Promise<void> = Promise.resolve()
+
+  // Keep scans, cache updates and writes in order across overlapping dev hooks.
+  const enqueue = (operation: () => Promise<void>): Promise<void> => {
+    const result = pending.then(operation)
+    pending = result.catch(() => {})
+    return result
+  }
+
+  const isGenerated = (id: string): boolean => id === outputFile || id.endsWith('.gen.ts')
 
   const collect = (source: string): Set<string> => {
     const codes = new Set<string>()
@@ -82,9 +92,9 @@ ${sortedCodes.map((code) => `  '${code}': ${getStatusCode(code)},`).join('\n')}
       // generated file does not exist yet
     }
 
-    lastContent = content
-
     await writeFile(outputFile, content, 'utf8')
+
+    lastContent = content
   }
 
   const scanAll = async (): Promise<void> => {
@@ -96,6 +106,10 @@ ${sortedCodes.map((code) => `  '${code}': ${getStatusCode(code)},`).join('\n')}
         exclude: ['**/*.gen.ts']
       })) {
         const id = normalizeId(join(cwd, file))
+        if (isGenerated(id)) {
+          continue
+        }
+
         const source = await readFile(id, 'utf8')
 
         moduleCodes.set(id, collect(source))
@@ -107,7 +121,7 @@ ${sortedCodes.map((code) => `  '${code}': ${getStatusCode(code)},`).join('\n')}
 
   return {
     async buildStart(): Promise<void> {
-      await scanAll()
+      await enqueue(scanAll)
     },
     name: 'error-code-map',
 
@@ -121,30 +135,43 @@ ${sortedCodes.map((code) => `  '${code}': ${getStatusCode(code)},`).join('\n')}
       },
 
       async handler(code: string, id: string): Promise<void> {
-        moduleCodes.set(normalizeId(id), collect(code))
+        const normalizedId = normalizeId(id)
 
-        await generate()
+        if (isGenerated(normalizedId)) {
+          return
+        }
+
+        await enqueue(async () => {
+          moduleCodes.set(normalizedId, collect(code))
+          await generate()
+        })
       }
     },
 
     async watchChange(id: string, change: { event: 'create' | 'update' | 'delete' }): Promise<void> {
       const normalizedId = normalizeId(id)
 
-      if (change.event === 'delete') {
-        moduleCodes.delete(normalizedId)
-        await generate()
+      if (isGenerated(normalizedId)) {
         return
       }
 
-      try {
-        const source = await readFile(normalizedId, 'utf8')
+      await enqueue(async () => {
+        if (change.event === 'delete') {
+          moduleCodes.delete(normalizedId)
+          await generate()
+          return
+        }
 
-        moduleCodes.set(normalizedId, collect(source))
-      } catch {
-        moduleCodes.delete(normalizedId)
-      }
+        try {
+          const source = await readFile(normalizedId, 'utf8')
 
-      await generate()
+          moduleCodes.set(normalizedId, collect(source))
+        } catch {
+          moduleCodes.delete(normalizedId)
+        }
+
+        await generate()
+      })
     }
   }
 }
